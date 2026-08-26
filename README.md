@@ -521,3 +521,21 @@ LayerCalc Studio provides engineering estimates and calibration assistance for F
 Results depend on printer hardware, filament characteristics, slicer settings, environmental conditions and measurement accuracy.
 
 Always validate calibration parameters on the target printer before production use.
+
+Download
+
+The latest signed Android release is available from GitHub Releases.
+
+Current release
+
+LayerCalc Studio v1.0.0
+
+Download the signed APK from:
+
+https://github.com/rexcacayo/LayerCalc-Studio/releases/latest
+
+The release APK is built, signed and verified through the project's GitHub Actions release pipeline.
+
+Android may request permission to install applications from outside Google Play when installing the APK manually.
+
+For developers who prefer to build from source, clone the repository and use the included Gradle wrapper.
