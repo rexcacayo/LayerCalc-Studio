@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">LayerCalc Studio</string>
+
+    <string name="dashboard_title">LayerCalc Studio</string>
+    <string name="dashboard_subtitle">Calculadora técnica para impresión 3D FDM</string>
+
+    <string name="section_print_profile">Perfil de impresión</string>
+    <string name="section_speed_flow">Velocidad y caudal</string>
+    <string name="section_flow_ratio">Flow Ratio</string>
+    <string name="section_pressure_advance">Pressure Advance</string>
+    <string name="section_filament">Filamento restante</string>
+    <string name="section_cost">Coste de impresión</string>
+
+    <string name="label_material">Material</string>
+    <string name="label_density">Densidad</string>
+    <string name="label_layer_height">Altura de capa</string>
+    <string name="label_line_width">Ancho de línea</string>
+    <string name="label_max_volumetric_flow">Caudal volumétrico máximo</string>
+    <string name="label_max_speed">Velocidad máxima</string>
+
+    <string name="label_current_flow_ratio">Flow Ratio actual</string>
+    <string name="label_theoretical_width">Ancho teórico</string>
+    <string name="label_wall_1">Pared 1</string>
+    <string name="label_wall_2">Pared 2</string>
+    <string name="label_wall_3">Pared 3</string>
+    <string name="label_wall_4">Pared 4</string>
+    <string name="label_new_flow_ratio">Nuevo Flow Ratio</string>
+
+    <string name="label_optimal_z">Altura Z óptima</string>
+    <string name="label_extruder_type">Tipo de extrusor</string>
+    <string name="label_pressure_advance">Pressure Advance</string>
+
+    <string name="label_gross_weight">Peso bruto</string>
+    <string name="label_spool_tare">Tara del carrete</string>
+    <string name="label_net_weight">Peso neto</string>
+    <string name="label_remaining_meters">Metros restantes</string>
+
+    <string name="label_part_weight">Peso de la pieza</string>
+    <string name="label_spool_price">Precio por kg</string>
+    <string name="label_print_time">Tiempo de impresión</string>
+    <string name="label_power">Consumo medio</string>
+    <string name="label_electricity_rate">Tarifa eléctrica</string>
+    <string name="label_machine_wear">Desgaste de máquina</string>
+    <string name="label_waste">Merma</string>
+    <string name="label_material_cost">Material</string>
+    <string name="label_electricity_cost">Electricidad</string>
+    <string name="label_machine_cost">Máquina</string>
+    <string name="label_total_cost">Total</string>
+
+    <string name="action_copy_orca">Copiar parámetros para OrcaSlicer</string>
+    <string name="action_new_profile">Nuevo</string>
+</resources>

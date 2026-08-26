@@ -1,0 +1,187 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "32a335ff3a319f9176fee4cec472b01b",
+    "entities": [
+      {
+        "tableName": "calibration_profiles",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `profileName` TEXT NOT NULL, `filamentManufacturer` TEXT NOT NULL, `filamentCommercialName` TEXT NOT NULL, `filamentVariant` TEXT NOT NULL, `materialType` TEXT NOT NULL, `density` REAL NOT NULL, `printerManufacturer` TEXT NOT NULL, `printerModel` TEXT NOT NULL, `nozzleDiameter` REAL NOT NULL, `extruderType` TEXT NOT NULL, `speed` REAL NOT NULL, `layerHeight` REAL NOT NULL, `lineWidth` REAL NOT NULL, `maxVolumetricFlow` REAL NOT NULL, `currentFlowRatio` REAL NOT NULL, `theoreticalWidth` REAL NOT NULL, `wall1` REAL NOT NULL, `wall2` REAL NOT NULL, `wall3` REAL NOT NULL, `wall4` REAL NOT NULL, `optimalZHeight` REAL NOT NULL, `calculatedFlowRatio` REAL NOT NULL, `calculatedPressureAdvance` REAL NOT NULL, `calculatedMaxSafeSpeed` REAL NOT NULL, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "profileName",
+            "columnName": "profileName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "filamentManufacturer",
+            "columnName": "filamentManufacturer",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "filamentCommercialName",
+            "columnName": "filamentCommercialName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "filamentVariant",
+            "columnName": "filamentVariant",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "materialType",
+            "columnName": "materialType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "density",
+            "columnName": "density",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "printerManufacturer",
+            "columnName": "printerManufacturer",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "printerModel",
+            "columnName": "printerModel",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nozzleDiameter",
+            "columnName": "nozzleDiameter",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "extruderType",
+            "columnName": "extruderType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "speed",
+            "columnName": "speed",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "layerHeight",
+            "columnName": "layerHeight",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lineWidth",
+            "columnName": "lineWidth",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxVolumetricFlow",
+            "columnName": "maxVolumetricFlow",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "currentFlowRatio",
+            "columnName": "currentFlowRatio",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "theoreticalWidth",
+            "columnName": "theoreticalWidth",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wall1",
+            "columnName": "wall1",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wall2",
+            "columnName": "wall2",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wall3",
+            "columnName": "wall3",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wall4",
+            "columnName": "wall4",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "optimalZHeight",
+            "columnName": "optimalZHeight",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "calculatedFlowRatio",
+            "columnName": "calculatedFlowRatio",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "calculatedPressureAdvance",
+            "columnName": "calculatedPressureAdvance",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "calculatedMaxSafeSpeed",
+            "columnName": "calculatedMaxSafeSpeed",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '32a335ff3a319f9176fee4cec472b01b')"
+    ]
+  }
+}

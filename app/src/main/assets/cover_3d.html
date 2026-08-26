@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <style>
+        body, html {
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          background-color: transparent;
+        }
+        canvas {
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+    </style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Estado de interacción táctil
+    let rotX = 0.3;
+    let rotY = 0;
+    let targetRotY = 0;
+    let targetRotX = 0.3;
+    let startX = 0, startY = 0;
+    let isTouching = false;
+
+    window.addEventListener('touchstart', (e) => {
+      if (e.touches.length > 0) {
+        isTouching = true;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      }
+    });
+
+    window.addEventListener('touchmove', (e) => {
+      if (isTouching && e.touches.length > 0) {
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+        targetRotY += dx * 0.005;
+        targetRotX += dy * 0.005;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      }
+    });
+
+    window.addEventListener('touchend', () => isTouching = false);
+
+    // Geometría 3D de la boquilla y capas
+    function project(x, y, z) {
+      // Rotación Y
+      let cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+      let x1 = x * cosY - z * sinY;
+      let z1 = z * cosY + x * sinY;
+
+      // Rotación X
+      let cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+      let y2 = y * cosX - z1 * sinX;
+      let z2 = z1 * cosX + y * sinX;
+
+      const fov = 420;
+      const distance = 550;
+      const scale = fov / (distance + z2);
+
+      return {
+        x: width / 2 + x1 * scale,
+        y: height / 2.3 + y2 * scale,
+        scale: scale
+      };
+    }
+
+    let time = 0;
+
+    function draw() {
+      time += 0.02;
+      if (!isTouching) {
+        targetRotY += 0.008;
+      }
+      rotY += (targetRotY - rotY) * 0.1;
+      rotX += (targetRotX - rotX) * 0.1;
+
+      ctx.clearRect(0, 0, width, height);
+
+      // 1. Grid Cama Caliente
+      ctx.strokeStyle = "rgba(255, 109, 0, 0.15)";
+      ctx.lineWidth = 1;
+      const gridSize = 160;
+      const step = 40;
+      const bedY = 120;
+
+      for (let i = -gridSize; i <= gridSize; i += step) {
+        let p1 = project(i, bedY, -gridSize);
+        let p2 = project(i, bedY, gridSize);
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+
+        let p3 = project(-gridSize, bedY, i);
+        let p4 = project(gridSize, bedY, i);
+        ctx.beginPath();
+        ctx.moveTo(p3.x, p3.y);
+        ctx.lineTo(p4.x, p4.y);
+        ctx.stroke();
+      }
+
+      // 2. Anillos de filamento extruido (Efecto Neon Cian)
+      const layers = [
+        { y: 80, r: 90, alpha: 0.25, color: "#00E5FF" },
+        { y: 50, r: 75, alpha: 0.5, color: "#00E5FF" },
+        { y: 20, r: 60, alpha: 0.85, color: "#00E5FF" }
+      ];
+
+      layers.forEach((layer) => {
+        ctx.strokeStyle = layer.color;
+        ctx.globalAlpha = layer.alpha;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        const segments = 36;
+        for (let i = 0; i <= segments; i++) {
+          const angle = (i / segments) * Math.PI * 2 + time;
+          const px = Math.cos(angle) * layer.r;
+          const pz = Math.sin(angle) * layer.r;
+          const p = project(px, layer.y, pz);
+          if (i === 0) ctx.moveTo(p.x, p.y);
+          else ctx.lineTo(p.x, p.y);
+        }
+        ctx.stroke();
+      });
+      ctx.globalAlpha = 1.0;
+
+      // 3. Hotend / Boquilla Flotante
+      const floatY = Math.sin(time * 2) * 8 - 40;
+
+      // Disipador (Aletas)
+      ctx.strokeStyle = "#90A4AE";
+      ctx.lineWidth = 4;
+      for (let fin = -60; fin <= -15; fin += 12) {
+        ctx.beginPath();
+        for (let i = 0; i <= 16; i++) {
+          const angle = (i / 16) * Math.PI * 2;
+          const px = Math.cos(angle) * 35;
+          const pz = Math.sin(angle) * 35;
+          const p = project(px, fin + floatY, pz);
+          if (i === 0) ctx.moveTo(p.x, p.y);
+          else ctx.lineTo(p.x, p.y);
+        }
+        ctx.stroke();
+      }
+
+      // Bloque Calefactor (Naranja)
+      const bW = 32, bH = 20, bD = 32;
+      const bY = 0 + floatY;
+      const vertices = [
+        [-bW, bY, -bD], [bW, bY, -bD], [bW, bY + bH, -bD], [-bW, bY + bH, -bD],
+        [-bW, bY, bD], [bW, bY, bD], [bW, bY + bH, bD], [-bW, bY + bH, bD]
+      ];
+      const pVerts = vertices.map(v => project(v[0], v[1], v[2]));
+
+      ctx.fillStyle = "rgba(255, 109, 0, 0.85)";
+      ctx.strokeStyle = "#FF9E40";
+      ctx.lineWidth = 2;
+
+      const faces = [
+        [0, 1, 2, 3], [4, 5, 6, 7], [0, 1, 5, 4],
+        [2, 3, 7, 6], [0, 3, 7, 4], [1, 2, 6, 5]
+      ];
+
+      faces.forEach(f => {
+        ctx.beginPath();
+        ctx.moveTo(pVerts[f[0]].x, pVerts[f[0]].y);
+        ctx.lineTo(pVerts[f[1]].x, pVerts[f[1]].y);
+        ctx.lineTo(pVerts[f[2]].x, pVerts[f[2]].y);
+        ctx.lineTo(pVerts[f[3]].x, pVerts[f[3]].y);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      });
+
+      // Punta de la Boquilla (Latón Dorado)
+      const tip = project(0, 32 + floatY, 0);
+      const tipBase = [
+        project(-12, 20 + floatY, -12),
+        project(12, 20 + floatY, -12),
+        project(12, 20 + floatY, 12),
+        project(-12, 20 + floatY, 12)
+      ];
+
+      ctx.fillStyle = "#FFD54F";
+      tipBase.forEach((p, idx) => {
+        const next = tipBase[(idx + 1) % 4];
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(next.x, next.y);
+        ctx.lineTo(tip.x, tip.y);
+        ctx.closePath();
+        ctx.fill();
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+</script>
+</body>
+</html>
