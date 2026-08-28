@@ -52,6 +52,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -560,7 +561,8 @@ fun DashboardScreen() {
                     BentoInput(
                         value = filamentManufacturer,
                         onValueChange = { filamentManufacturer = it },
-                        label = "Fabricante"
+                        label = "Fabricante",
+                        keyboardType = KeyboardType.Text
                     )
 
                     DropdownSelector(
@@ -584,13 +586,15 @@ fun DashboardScreen() {
                     BentoInput(
                         value = filamentCommercialName,
                         onValueChange = { filamentCommercialName = it },
-                        label = "Gama / nombre comercial (opcional)"
+                        label = "Gama / nombre comercial (opcional)",
+                        keyboardType = KeyboardType.Text
                     )
 
                     BentoInput(
                         value = filamentVariant,
                         onValueChange = { filamentVariant = it },
-                        label = "Variante / color (opcional)"
+                        label = "Variante / color (opcional)",
+                        keyboardType = KeyboardType.Text
                     )
 
                     HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f))
@@ -607,12 +611,14 @@ fun DashboardScreen() {
                             value = printerManufacturer,
                             onValueChange = { printerManufacturer = it },
                             label = "Fabricante",
+                            keyboardType = KeyboardType.Text,
                             modifier = Modifier.weight(1f)
                         )
                         BentoInput(
                             value = printerModel,
                             onValueChange = { printerModel = it },
                             label = "Modelo",
+                            keyboardType = KeyboardType.Text,
                             modifier = Modifier.weight(1f)
                         )
                     }

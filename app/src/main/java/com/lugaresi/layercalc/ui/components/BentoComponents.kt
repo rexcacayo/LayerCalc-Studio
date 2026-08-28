@@ -96,7 +96,8 @@ fun BentoInput(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     suffix: String = "",
-    label: String? = null
+    label: String? = null,
+    keyboardType: KeyboardType = KeyboardType.Decimal
 ) {
     Column(modifier = modifier) {
         if (!label.isNullOrBlank()) {
@@ -121,7 +122,7 @@ fun BentoInput(
                     fontWeight = FontWeight.Bold
                 ),
                 cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
                 singleLine = true,
                 modifier = Modifier.weight(1f)
             )
