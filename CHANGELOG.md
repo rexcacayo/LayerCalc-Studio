@@ -64,3 +64,26 @@ The project follows [Semantic Versioning](https://semver.org/) using the format:
 LayerCalc Studio `v1.0.0` establishes the initial architecture and feature set for future development.
 
 Future versions may include expanded printer presets, filament libraries, profile comparison, additional slicer support, enhanced automated testing and optional profile synchronization.
+
+
+## [1.0.2] - 2026-08-29
+
+### Fixed
+
+- Corrected keyboard type handling in text input fields.
+- Manufacturer, printer model, commercial name and variant/color fields now open a text keyboard instead of a numeric keyboard.
+- Numeric calibration and cost fields continue using decimal input as expected.
+
+### Compatibility
+
+- No changes to calibration formulas.
+- No changes to Room database schema.
+- No changes to OrcaSlicer or Bambu Studio JSON compatibility.
+- Existing saved profiles remain compatible.
+
+### Validation
+
+- Tested on a real Android device.
+- Verified text and numeric input behavior after the fix.
+- Basic profile save/load and export flows remain functional.
+
