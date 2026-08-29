@@ -49,4 +49,6 @@ replay_pid*
 
 # Kotlin Gradle plugin data, see https://kotlinlang.org/docs/whatsnew20.html#new-directory-for-kotlin-data-in-gradle-projects
 .kotlin/
->>>>>>> 1e76c72b99692bd5515adf1b0b039576459eb154
+
+*.jks
+*.keystore
